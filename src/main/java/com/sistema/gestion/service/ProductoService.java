@@ -44,21 +44,35 @@ public class ProductoService implements IProductoService{
 
     @Override
     public ProductoDTO actualizarProducto(Long idProducto, ProductoDTO productoDTO) {
-        return null;
+        Producto producto = productoRepository.findById(idProducto)
+                .orElseThrow(()-> new RuntimeException("Producto no encontrado"));
+        producto.setNombreProducto(productoDTO.getNombreProducto());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecioCompra(productoDTO.getPrecioCompra());
+        producto.setPrecioVenta(productoDTO.getPrecioVenta());
+        producto.setStock(productoDTO.getStock());
+        producto.setStockMinimo(productoDTO.getStockMinimo());
+        if(productoDTO.getIdCategoria() != null){
+            producto.setCategoria(categoriaRepository.findById(productoDTO.getIdCategoria()).orElse(null));
+        }
+        return Mapper.toDTO(productoRepository.save(producto));
     }
 
     @Override
     public void eliminarProducto(Long idProducto) {
+        if(!productoRepository.existsById(idProducto)){
+            throw new RuntimeException("Producto no encontrado");
+        }
 
+        productoRepository.deleteById(idProducto);
     }
 
     @Override
     public ProductoDTO traerPorId(Long idProducto) {
-        return null;
+        return productoRepository.findById(idProducto)
+                .map(Mapper::toDTO)
+                .orElseThrow(()->new RuntimeException("No se encontro el producto"));
     }
 
-    @Override
-    public List<ProductoDTO> buscarPorNombre(String nombreProducto) {
-        return List.of();
-    }
+
 }

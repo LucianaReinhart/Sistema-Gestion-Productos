@@ -10,5 +10,4 @@ public interface IProductoService {
     ProductoDTO actualizarProducto(Long idProducto,ProductoDTO productoDTO);
     void eliminarProducto(Long idProducto);
     ProductoDTO traerPorId(Long idProducto);
-    List<ProductoDTO> buscarPorNombre(String nombreProducto);
 }
