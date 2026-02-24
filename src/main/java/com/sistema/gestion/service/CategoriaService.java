@@ -6,10 +6,11 @@ import com.sistema.gestion.model.Categoria;
 import com.sistema.gestion.repository.CategoriaRepository;
 import com.sistema.gestion.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class CategoriaService implements ICategoriaService{
 
     @Autowired
