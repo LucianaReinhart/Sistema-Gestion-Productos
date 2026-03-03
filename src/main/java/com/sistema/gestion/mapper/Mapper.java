@@ -18,7 +18,7 @@ public class Mapper {
                 .precioVenta(producto.getPrecioVenta())
                 .stock(producto.getStock())
                 .stockMinimo(producto.getStockMinimo())
-                .idCategoria(producto.getCategoria().getIdCategoria())
+                .idCategoria(producto.getCategoria() != null ? producto.getCategoria().getIdCategoria() : null)
                 .build();
 
     }
